@@ -9,7 +9,7 @@ var reservationsRouter = require('./routes/reservation')
 var pagesRouter = require('./routes/pages');
 
 
-const {initClientDbConnection} = require('./db/mongo');
+const {initClientDbConnection} = require('../db/mongo');
 
 var app = express();
 

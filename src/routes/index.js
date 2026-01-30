@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-const userRoute = require('../routes/users');
-const catwayRoute = require('../routes/catway');
-const reservationRoute = require('../routes/reservation');
+const userRoute = require('./users');
+const catwayRoute = require('./catway');
+const reservationRoute = require('./reservation');
 
 
 router.use('/users', userRoute);

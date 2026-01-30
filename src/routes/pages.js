@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { checkJWT } = require('../middlewares/private');
+const { checkJWT } = require('../../middlewares/private');
 const Reservation = require('../models/reservation');
 const Catway = require('../models/catway')
 const User = require('../models/user')

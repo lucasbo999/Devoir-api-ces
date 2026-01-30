@@ -4,7 +4,7 @@ var router = express.Router();
 const service = require('../services/users');
 const auth = require('../services/auth');
 
-const private = require('../middlewares/private');
+const private = require('../../middlewares/private');
 
 router.post('/authenticate', auth.authenticate);
 
