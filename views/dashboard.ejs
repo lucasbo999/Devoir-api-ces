@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Tableau de bord</title>
+</head>
+<body>
+<header>
+  <nav>  
+    <a href="/dashboard">Dashboard</a> 
+    <a href="/reservations">Réservations</a> 
+    <a href="/users">Utilisateurs</a>
+    <a href="/catways">Catways</a>
+    <a href="/logout">Déconnexion</a>
+  </nav>
+
+  <h1>Tableau de bord</h1>
+</header>
+<main>
+  <p>Connecté en tant que : <strong><%= user.name %></strong></p>
+  <p>Email : <%= user.email %> </p>
+  <p>Date du jour : <%= new Date().toLocaleDateString() %></p>
+
+  <section>
+    <h2>Réservations en cours</h2>
+
+    <table>
+      <tr>
+        <th>Client</th>
+        <th>Catway</th>
+        <th>Début</th>
+        <th>Fin</th>
+      </tr>
+
+      <% reservations.forEach(r => { %>
+        <tr>
+          <td><%= r.clientName %></td>
+          <td><%= r.catwayNumber %></td>
+          <td><%= r.startDate.toDateString() %></td>
+          <td><%= r.endDate.toDateString() %></td>
+        </tr>
+      <% }) %>
+    </table>    
+  </section>
+
+  <p><a href="/documentation">Documentation de l’API</a></p>
+</main>
+
+</body>
+</html>

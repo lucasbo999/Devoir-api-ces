@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Réservations</title>
+</head>
+<body>
+<header>
+  <nav>
+    <a href="/dashboard">Dashboard</a> 
+    <a href="/reservations">Réservations</a> 
+    <a href="/users">Utilisateurs</a>
+    <a href="/catways">Catways</a>
+    <a href="/logout">Déconnexion</a>
+  </nav>
+
+  <h1>Réservations</h1>
+</header>
+<main>
+
+  <section>
+    <h2>Mes réservations actuel</h2>
+
+    <table>
+    <tr>
+      <th>Client</th>
+      <th>Catway</th>
+      <th>Début</th>
+      <th>Fin</th>
+    </tr>
+
+    <% reservations.forEach(r => { %>
+      <tr>
+        <td><%= r.clientName %></td>
+        <td><%= r.catwayNumber %></td>
+        <td><%= r.startDate.toDateString() %></td>
+        <td><%= r.endDate.toDateString() %></td>
+      </tr>
+    <% }) %>
+  </table>
+
+  </section>
+  <section>
+    <h2>Modifier une réservation</h2>
+
+    <form method="POST" action="/reservations/update">
+
+      <label>Réservation à modifier</label>
+      <select name="reservationId">
+        <% reservations.forEach(r => { %>
+          <option value="<%= r._id %>">
+            <%= r.clientName %>
+          </option>
+        <% }) %>
+      </select>
+
+      <label>Nouveau numéro de catway</label>
+      <select name="catwayNumber">
+        <% for (let i = 1; i <= 24; i++) { %>
+          <option value="<%= i %>"><%= i %></option>
+        <% } %>
+      </select>
+
+      <label>Date début</label>
+      <input type="date" name="startDate">
+
+      <label>Date fin</label>
+      <input type="date" name="endDate">
+
+      <button type="submit">Modifier la réservation</button>
+    </form>
+  </section>
+  <section>
+    <h2>Ajouter une réservation</h2>
+
+    <form method="POST" action="/reservations/add">
+
+      <label>Date de début</label>
+      <input type="date" name="startDate" required  min="<%= new Date().toISOString().split('T')[0] %>">
+
+      <label>Date de fin</label>
+      <input type="date" name="endDate" required  min="<%= new Date().toISOString().split('T')[0] %>">
+      
+      <label>Numéro de catway</label>
+      <select name="catwayNumber">
+        <% for (let i = 1; i <= 24; i++) { %>
+          <option value="<%= i %>"><%= i %></option>
+        <% } %>
+      </select>
+
+      <label>Nom du bateau</label>
+      <input type="text" name="boatName" required>  
+
+      <button type="submit">Ajouter cette réservation</button>
+    </form>
+
+  </section>
+    <section>
+    <h2>Supprimer une réservation</h2>
+
+    <form method="POST" action="/reservations/delete">
+
+      <label>Réservation à Supprimer</label>
+      <select name="reservationId">
+        <% reservations.forEach(r => { %>
+          <option value="<%= r._id %>">
+            <%= r.clientName %>
+          </option>
+        <% }) %>
+      </select>
+
+      <button type="submit">Supprimer la réservation</button>
+    </form>
+  </section>
+</main>
+
+</body>
+</html>

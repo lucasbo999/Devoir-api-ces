@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Catways</title>
+</head>
+<body>
+  <header>
+    <nav> 
+      <a href="/dashboard">Dashboard</a> 
+      <a href="/reservations">Réservations</a> 
+      <a href="/users">Utilisateurs</a>
+      <a href="/catways">Catways</a>
+      <a href="/logout">Déconnexion</a>
+    </nav>
+
+    <h1>Catways</h1>
+  </header>
+  <main>
+
+    <section>
+      <h2>Réservations en cours</h2>
+
+      <table>
+        <tr>
+          <th>Numéro du catway</th>
+          <th>Taille du catway</th>
+          <th>État du catway</th>
+        </tr>
+
+        <% catways .sort((a, b) => a.catwayNumber - b.catwayNumber) .forEach(c => { %>
+          <tr>
+            <td><%= c.catwayNumber %></td>
+            <td><%= c.catwayType %></td>
+            <td><%= c.catwayState %></td>
+          </tr>
+        <% }) %>
+      </table>    
+    </section>
+
+    <section>
+      <h2>Modifier un catway</h2>
+
+      <form method="post" action="/catways/update">
+
+        <label>Choisir le catway</label>
+        <select name="catwayId">
+          <% catways.forEach(c => { %>
+            <option value="<%= c._id %>">
+              <%= c.catwayNumber %>
+            </option>
+          <% }) %>
+        </select>
+
+        <label>Taille du catway</label>
+        <select name="catwayType">
+          <option value="short">court</option>
+          <option value="long">long</option>
+        </select>
+
+        <label>État du catway</label>
+        <input type="text" name="catwayState">
+
+        <button type="submit">Modifier ce catway</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Ajouter un catway</h2>
+
+      <form method="post" action="/catways/add">
+        <label for="">Le numéro du catway</label>
+        <input name="catwayNumber">
+        
+        <label for="">Taille du catway</label>
+        <select name="catwayType">
+          <option value="short">court</option>
+          <option value="long">long</option>
+        </select>
+
+        <label for="">État du catway</label>
+        <input type="text" name="catwayState">
+
+        <button type="submit">Ajouter ce catway</button>
+      </form>
+    </section>
+    <section>
+      <h2>Supprimer un catway</h2>
+
+      <form method="POST" action="/catways/delete">
+        <label>Choisir le catway</label>
+        <select name="catwayId">
+          <% catways.forEach(c => { %>
+            <option value="<%= c._id %>">
+              <%= c.catwayNumber %>
+            </option>
+          <% }) %>
+        </select>
+
+        <button type="submit">Supprimer ce catway</button>
+      </form>
+    </section>
+  </main>
+
+</body>
+</html>
